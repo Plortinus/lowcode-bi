@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+const json = {
+  deviceId: "{{$self.deviceId}}",
+}
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    test
   </main>
 </template>
