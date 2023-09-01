@@ -52,7 +52,7 @@ const schema = {
 const login = async (values: object) => {
   try {
     const res = await getLogin(values)
-    if (res.data.errCode === 0) {
+    if (res.errCode === 0) {
       router.push('/home')
     }
   } catch (error) {
