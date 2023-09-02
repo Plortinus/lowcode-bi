@@ -1,9 +1,10 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
+import { BASE_API_URL } from '@/constants/global'
 
 export class Request {
   instance: AxiosInstance
-  baseConfig: AxiosRequestConfig = { timeout: 60000 }
+  baseConfig: AxiosRequestConfig = { baseURL: BASE_API_URL, timeout: 60000 }
 
   constructor(config: AxiosRequestConfig) {
     this.instance = axios.create({ ...this.baseConfig, ...config })
