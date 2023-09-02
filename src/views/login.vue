@@ -8,6 +8,7 @@ import { createForm } from '@formily/core'
 import { FormProvider, createSchemaField } from '@formily/vue'
 import { FormItem, Submit, Input } from '@formily/element-plus'
 import { getLogin } from '@/api/user'
+import { StorageKeys } from '@/constants/global'
 
 const router = useRouter()
 
@@ -52,7 +53,9 @@ const schema = {
 const login = async (values: object) => {
   try {
     const res = await getLogin(values)
-    if (res.errCode === 0) {
+    const { data, errCode } = res
+    if (errCode === 0) {
+      localStorage.setItem(StorageKeys.LoggedInUser, JSON.stringify(data))
       router.push('/home')
     }
   } catch (error) {
