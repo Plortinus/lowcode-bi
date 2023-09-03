@@ -2,6 +2,9 @@ import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse 
 import { ElMessage } from 'element-plus'
 import { BASE_API_URL } from '@/constants/global'
 import { getToken, removeToken, setToken } from './auth'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 export class Request {
   instance: AxiosInstance
@@ -40,6 +43,8 @@ export class Request {
             break
           case 401:
             message = '未授权，请重新登录(401)'
+            removeToken()
+            router.replace('/login')
             break
           case 403:
             message = '拒绝访问(403)'
