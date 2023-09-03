@@ -1,6 +1,7 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
 import { BASE_API_URL } from '@/constants/global'
+import { getToken, removeToken, setToken } from './auth'
 
 export class Request {
   instance: AxiosInstance
@@ -11,7 +12,7 @@ export class Request {
 
     this.instance.interceptors.request.use(
       (config) => {
-        const token = localStorage.getItem('token') as string
+        const token = getToken()
         if (token) {
           config.headers!.Authorization = token
         }
@@ -23,7 +24,14 @@ export class Request {
     )
 
     this.instance.interceptors.response.use(
-      (res: AxiosResponse) => res,
+      (res: AxiosResponse) => {
+        // refresh access token
+        const token = res.headers.authorization
+        if (token) {
+          setToken(token)
+        }
+        return res
+      },
       (err: any) => {
         let message = ''
         switch (err.response.status) {
@@ -65,7 +73,7 @@ export class Request {
         }
         ElMessage({
           showClose: true,
-          message: `${message}，请检查网络或联系管理员！`,
+          message: `${message}`,
           type: 'error'
         })
         return Promise.reject(err.response)
