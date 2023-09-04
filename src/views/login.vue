@@ -8,6 +8,7 @@ import { createForm } from '@formily/core'
 import { FormProvider, createSchemaField } from '@formily/vue'
 import { FormItem, Submit, Input } from '@formily/element-plus'
 import { getLogin } from '@/api/user'
+import { getOrgs } from '@/api/org'
 import { StorageKeys } from '@/constants/global'
 
 const router = useRouter()
