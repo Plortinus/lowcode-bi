@@ -57,7 +57,7 @@ const login = async (values: object) => {
     const { data, errCode } = res
     if (errCode === 0) {
       localStorage.setItem(StorageKeys.LoggedInUser, JSON.stringify(data))
-      router.push('/home')
+      router.push('/welcome')
     }
   } catch (error) {
     console.log('error: ', error)

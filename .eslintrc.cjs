@@ -13,6 +13,7 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
-    "no-useless-catch": "off"
+    "no-useless-catch": "off",
+    "multi-word-component-names": "off",
   }
 }
