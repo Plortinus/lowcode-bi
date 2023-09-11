@@ -2,17 +2,26 @@
 defineOptions({
   name: 'LayoutIndex'
 })
+import { useRoute } from 'vue-router'
 import { useOrgStore } from '@/stores/org'
+import { onMounted } from 'vue'
+
+const route = useRoute()
+const orgId = route.params.orgId as string
+
 const orgStore = useOrgStore()
 
-orgStore.getOrgs()
-
-const orgId = orgStore.currentOrgId
+onMounted(() => {
+  orgStore.getOrgs()
+  if (orgId) {
+    orgStore.setCurrentOrgId(orgId)
+  }
+})
 
 const menus = [
   {
     name: '数据源',
-    index: `/org/${orgId}/sources`
+    index: `/org/${orgStore.currentOrgId}/sources`
   }
 ]
 </script>

@@ -32,7 +32,7 @@ onMounted(() => {
       <el-table-column prop="type" label="类型" />
       <el-table-column prop="id" label="详情">
         <template #default="{ row }">
-          <router-link :to="`/org/${orgId}/source/${row.id}`">详情</router-link>
+          <router-link :to="`/org/${orgId}/sources/${row.id}`">详情</router-link>
         </template>
       </el-table-column>
     </el-table>

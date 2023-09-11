@@ -9,27 +9,23 @@ interface Org {
 export const useOrgStore = defineStore('org', {
   state: () => ({
     list: [] as Org[],
-    currentIndex: 0
+    currentOrgId: ''
   }),
   getters: {
     currentOrg: (state) => {
-      return state.list[state.currentIndex]
-    },
-    currentOrgId: (state) => {
-      return state.list[state.currentIndex]?.id
+      return state.list.find((org) => org.id === state.currentOrgId)
     }
   },
   actions: {
     async getOrgs() {
       const { data } = await getOrgs()
       this.setOrgs(data)
-      this.setCurrentIndex(0)
     },
     setOrgs(orgs: Org[]) {
       this.list = orgs
     },
-    setCurrentIndex(index: number) {
-      this.currentIndex = index
+    setCurrentOrgId(id: string) {
+      this.currentOrgId = id
     }
   }
 })
