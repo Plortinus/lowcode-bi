@@ -2,9 +2,7 @@ import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse 
 import { ElMessage } from 'element-plus'
 import { BASE_API_URL } from '@/constants/global'
 import { getToken, removeToken, setToken } from './auth'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
+import router from '@/router'
 
 export class Request {
   instance: AxiosInstance
